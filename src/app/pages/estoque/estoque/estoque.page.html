@@ -1,5 +1,10 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-icon slot="icon-only" name="menu"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>Estoque</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -18,10 +23,14 @@
         </ion-avatar>
         <ion-label>
           {{ dados.Nome }}
-          <p>R$ {{ dados.Preco }}</p>
-          <p> {{ categorias[dados.FkCategoria - 1].Nome }}</p>
+          <p>{{ categorias[dados.FkCategoria - 1].Nome }} · R$ {{ dados.Preco }}</p>
         </ion-label>
         <ion-chip slot="end">{{ dados.QtdEstoque }}</ion-chip>
       </ion-item>
+
+      <ion-button expand="block" fill="clear" shape="round" color="medium">
+        <ion-icon slot="start" name="add"></ion-icon>
+        Novo produto
+      </ion-button>
   </ion-list>
 </ion-content>
