@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Carrinho</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="fechar()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let item of itensCarrinho; let i = index">
+      <ion-label> 
+        {{ item.nome }} 
+        <p> R$ {{ item.preco }} </p>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-icon button (click)="carrinhoService.removerCarrinho(item, i)" slot="icon-only" name="trash" size="small"></ion-icon>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button (click)="carrinhoService.limparCarrinho()" expand="block" shape="round" color="danger">
+          <ion-icon slot="start" name="close-circle"></ion-icon>
+          Limpar
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button (click)="carrinhoService.confirmarCarrinho()" expand="block" shape="round" color="success">
+          <ion-icon slot="end" name="checkmark-circle"></ion-icon>
+          Confirmar
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/pedidos"></ion-back-button>
+    </ion-buttons>
+    <ion-title size="large"> {{ categoria?.Nome }} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large"> {{ categoria?.Nome }} </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    <ion-item button *ngFor="let item of produtos; let i = index" (click)="carrinhoService.adicionarCarrinho(item)">
+      <ion-avatar slot="start">
+        <img src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
+      </ion-avatar>
+      <ion-label> 
+        {{ item.Nome }} 
+        <p> R$ {{ item.Preco }} </p>
+      </ion-label>
+      <ion-chip slot="end">{{ item.QtdEstoque }}</ion-chip>
+    </ion-item>
+  </ion-list>
+  
+  <!-- <ion-item button *ngFor="let dados of produtos, let i = index" [routerLink]="[dados.Id]">
+    <ion-avatar slot="start">
+      <img src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
+    </ion-avatar>
+    <ion-label>
+      {{ dados.Nome }}
+      <p>R$ {{ dados.Preco }}</p>
+      <p> {{ categorias[dados.FkCategoria - 1].Nome }}</p>
+    </ion-label>
+    <ion-chip slot="end">{{ dados.QtdEstoque }}</ion-chip>
+  </ion-item> -->
+</ion-content>

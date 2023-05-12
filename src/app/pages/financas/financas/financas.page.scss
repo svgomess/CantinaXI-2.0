@@ -1,0 +1,13 @@
+.icone-imagem{
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+
+    img.large{
+        width: 10rem;
+    }
+    
+    img.small{
+        width: 5rem;
+    }
+}

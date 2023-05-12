@@ -1,0 +1,52 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/estoque" text="Voltar"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="ion-text-center"> {{ produto?.Nome }} </ion-card-title>
+      <ion-card-subtitle class="ion-text-center"> {{ produto?.FkCategoria }} </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid fixed>
+        <!-- Linha Preço e Quantidade -->
+          <ion-row class="ion-padding">
+            <ion-col size="6">
+                <ion-card-subtitle class="ion-text-center">Preço</ion-card-subtitle>
+                <ion-card-title class="ion-text-center" color="dark">R$ {{ produto?.Preco }}</ion-card-title>       
+            </ion-col>
+            <ion-col size="6">
+                <ion-card-subtitle class="ion-text-center">Quantia</ion-card-subtitle>
+                <ion-card-title class="ion-text-center" color="dark">{{ produto?.QtdEstoque }}</ion-card-title> 
+            </ion-col>
+          </ion-row>
+    
+        <!-- Linha Fornecedor -->
+          <ion-row class="ion-padding">
+            <ion-col size="12">
+              <ion-card-subtitle class="ion-text-center">Fornecedor</ion-card-subtitle>
+              <ion-card-title class="ion-text-center" color="dark">{{ produto?.FkFornecedor }}</ion-card-title>            
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      <!-- <ion-item>
+        <ion-icon slot="start" name="cash"></ion-icon>
+        <ion-label>{{ produto?.Preco }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" name="file-tray"></ion-icon>
+        <ion-label>{{ produto?.QtdEstoque }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" name="person"></ion-icon>
+        <ion-label>{{ produto?.FkFornecedor }}</ion-label>
+      </ion-item> -->
+    </ion-card-content>
+  </ion-card>
+</ion-content>

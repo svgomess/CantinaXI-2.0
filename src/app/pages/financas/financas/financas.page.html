@@ -1,0 +1,88 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Finanças</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Finanças</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card class="ion-padding">
+          <div class="icone-imagem">
+            <!-- ImgBox Link - https://imgbox.com/7EmogKZV -->
+            <img alt="Ícone de histórico" src="https://images2.imgbox.com/18/ca/7EmogKZV_o.png" class="large"/>
+          </div>
+          <ion-card-header>
+            <ion-card-subtitle class="ion-text-center">Total do Dia — R$ 0,00</ion-card-subtitle>
+            <ion-card-title class="ion-text-center bold">Histórico de Vendas</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-title class="ion-text-center">Formas de Pagamento</ion-title>
+      </ion-col>
+    </ion-row>
+
+    <!-- Linha 1 - Mensal e Saldo -->
+    <ion-row>
+      <ion-col size="6">
+
+          <ion-card class="ion-padding" id="display-lista-{ID}">
+            <div class="icone-imagem">
+              <!-- ImgBox Link - https://imgbox.com/yAa4OifG -->
+              <img alt="Ícone de mensalistas" src="https://images2.imgbox.com/52/55/yAa4OifG_o.png" class="small"/>
+            </div>
+            <ion-card-header>
+              <ion-card-subtitle class="ion-text-center bold" color="dark">Mensal</ion-card-subtitle>
+            </ion-card-header>
+          </ion-card>
+
+      </ion-col>
+      <ion-col size="6">
+        <ion-card class="ion-padding" id="display-lista-{ID}">
+          <div class="icone-imagem">
+            <!-- ImgBox Link - https://imgbox.com/Gi5t4au1 -->
+            <img alt="Ícone de saldo" src="https://images2.imgbox.com/ad/cd/Gi5t4au1_o.png" class="small"/>
+          </div>
+          <ion-card-header>
+            <ion-card-subtitle class="ion-text-center bold" color="dark">Saldo</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    
+    <!-- Linha 2 - Pix e Fiado -->
+    <ion-row>
+      <ion-col size="6">
+        <ion-card class="ion-padding">
+          <div class="icone-imagem">
+            <!-- ImgBox Link - https://imgbox.com/fA5PtQj2 -->
+            <img alt="Ícone de Pix" src="https://images2.imgbox.com/87/20/fA5PtQj2_o.png" class="small"/>
+          </div>
+          <ion-card-header>
+            <ion-card-subtitle class="ion-text-center bold" color="dark">Pix</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card class="ion-padding">
+          <div class="icone-imagem">
+            <!-- ImgBox Link - https://imgbox.com/8oAScZkR -->
+            <img alt="Ícone de saldo" src="https://images2.imgbox.com/9f/f8/8oAScZkR_o.png" class="small"/>
+          </div>
+          <ion-card-header>
+            <ion-card-subtitle class="ion-text-center bold" color="dark">Fiado</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
