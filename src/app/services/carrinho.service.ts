@@ -20,12 +20,17 @@ export class CarrinhoService {
       quantia: 1
     }
 
-    // if(this.carrinhoService.itensCarrinho.find()){
-    //   console.log("Item já inserido")
-    // }
+    var checar = this.itensCarrinho.find(item => item.id === conteudo.id);
+    console.log(checar ? "Item existe" : "Item não existe");
+    console.log(checar)
 
-    this.itensCarrinho.push(conteudo)
-    console.log(this.itensCarrinho)
+    if(!checar){
+      this.itensCarrinho.push(conteudo)
+      console.log("Item novo inserido")
+    } else {
+      conteudo.quantia++
+      console.log("Quantidade do item alterada")
+    }
 
     const toast = await this.toastCtrl.create({
       message: `O item ${produto.Nome} foi adicionado ao carrinho`,

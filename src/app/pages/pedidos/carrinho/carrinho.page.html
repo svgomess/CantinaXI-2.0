@@ -19,6 +19,7 @@
       <ion-label> 
         {{ item.nome }} 
         <p> R$ {{ item.preco }} </p>
+        <p> {{ item.quantia }} </p>
       </ion-label>
       <ion-buttons slot="end">
         <ion-icon button (click)="carrinhoService.removerCarrinho(item, i)" slot="icon-only" name="trash" size="small"></ion-icon>
