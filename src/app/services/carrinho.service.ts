@@ -21,15 +21,15 @@ export class CarrinhoService {
     }
 
     var checar = this.itensCarrinho.find(item => item.id === conteudo.id);
-    console.log(checar ? "Item existe" : "Item não existe");
-    console.log(checar)
 
     if(!checar){
       this.itensCarrinho.push(conteudo)
-      console.log("Item novo inserido")
     } else {
-      conteudo.quantia++
-      console.log("Quantidade do item alterada")
+      var idItem = this.itensCarrinho.findIndex((obj => obj.id == checar.id))
+      var itemAtual = this.itensCarrinho[idItem]
+
+      itemAtual.quantia++
+      itemAtual.preco = produto.Preco * itemAtual.quantia
     }
 
     const toast = await this.toastCtrl.create({
@@ -42,7 +42,15 @@ export class CarrinhoService {
 
   async removerCarrinho(produto: any, index: number){
 
-    this.itensCarrinho.splice(index, 1);
+    if(produto.quantia > 1){
+      var itemAtual = this.itensCarrinho[index]
+      var precoBase = itemAtual.preco / itemAtual.quantia
+      
+      itemAtual.quantia--
+      itemAtual.preco = precoBase * itemAtual.quantia
+    } else {
+      this.itensCarrinho.splice(index, 1);
+    }
 
     const toast = await this.toastCtrl.create({
       message: `O item ${produto.nome} foi removido`,

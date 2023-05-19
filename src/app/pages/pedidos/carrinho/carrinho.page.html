@@ -17,9 +17,8 @@
   <ion-list>
     <ion-item *ngFor="let item of itensCarrinho; let i = index">
       <ion-label> 
-        {{ item.nome }} 
-        <p> R$ {{ item.preco }} </p>
-        <p> {{ item.quantia }} </p>
+        {{ item.nome }} x{{ item.quantia }}
+        <p> {{ item.preco | currency:'R$ ' }} </p>
       </ion-label>
       <ion-buttons slot="end">
         <ion-icon button (click)="carrinhoService.removerCarrinho(item, i)" slot="icon-only" name="trash" size="small"></ion-icon>
