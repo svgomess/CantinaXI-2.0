@@ -1,16 +1,28 @@
 import { CurrencyPipe, DecimalPipe, formatCurrency, formatNumber } from '@angular/common';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+
+export interface VendaDados {
+  ValorTotal: number
+  FkCliente: number
+  FkFormaPagamento: number
+  FkUsuario: string
+}
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class CarrinhoService {
   itensCarrinho: any[] = [];
 
   constructor(
     private toastCtrl:ToastController,
-    private alertCtrl: AlertController) { }
+    private alertCtrl: AlertController,
+    private http:HttpClient) { }
 
   async adicionarCarrinho(produto: any){  
     let conteudo: any = {
@@ -90,9 +102,17 @@ export class CarrinhoService {
         },  
         {  
           text: 'CONFIRMAR',  
-          handler: async () => {  
-            console.log('Compra efetuada');
+          handler: async () => { 
+            const dadosVenda: VendaDados = {
+              'ValorTotal': total,
+              'FkCliente': 2,
+              'FkFormaPagamento': 1,
+              'FkUsuario': 'Placeholder'
+            }
+
+            this.enviarVenda(dadosVenda)
             this.itensCarrinho.splice(0); 
+
             const toast = await this.toastCtrl.create({
               message: `Compra realizada com sucesso`,
               duration: 1000,
@@ -105,6 +125,7 @@ export class CarrinhoService {
     });
 
     await alert.present();
+
   }
 
   calcularTotal(){
@@ -125,4 +146,16 @@ export class CarrinhoService {
   //   this.carrinhoComponent.itensCarrinho.push(this.produtos[id].Id)
   //   console.log(this.carrinhoComponent.itensCarrinho)
   // }
+
+  enviarVenda(venda: VendaDados): void{
+    this.cadastrarVenda(venda).subscribe(
+      (response) => console.log(response),
+      (error: any) => console.log(error),
+      () => console.log("Venda enviada")
+    )
+  }
+
+  cadastrarVenda(venda: VendaDados): Observable<VendaDados> {      
+    return this.http.post<VendaDados>(`${environment.baseUrl}/venda/inserir`, venda);
+  }
 }
