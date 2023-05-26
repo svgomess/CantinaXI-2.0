@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingController, ModalController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { CarrinhoPage } from 'src/app/pages/pedidos/carrinho/carrinho.page'
 import { CategoriaDados, CategoriaService } from 'src/app/services/categoria.service';
 
@@ -13,6 +13,7 @@ export class PedidosPage implements OnInit {
   constructor(
     private categoriaService:CategoriaService,
     private modalCtrl: ModalController, 
+    private alertCtrl: AlertController,
     private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
@@ -33,6 +34,11 @@ export class PedidosPage implements OnInit {
     })
   }
 
+  async atualizarCategorias(data: any){
+    this.categorias.push(data)
+    console.log(this.categorias)
+  }
+
   async mostrarCarrinho(){
     const modal = await this.modalCtrl.create({
       component: CarrinhoPage,
@@ -42,6 +48,36 @@ export class PedidosPage implements OnInit {
     })
     await modal.present()
     console.log("carrinho")
+  }
+
+  async criarCategoriaAlert(){
+    const alert = await this.alertCtrl.create({
+      header: 'Criar categoria',
+      inputs: [
+        {  
+          name: 'Nome',  
+          type: 'text',  
+          placeholder: 'Nome da categoria'
+        }
+      ],
+      buttons: [  
+        {  
+          text: 'CANCELAR',  
+          role: 'cancel',  
+          handler: () => {  
+            console.log('Cancelado');  
+          }  
+        },  
+        {  
+          text: 'CONFIRMAR',  
+          handler: async (data: any) => { 
+            if(data.Nome != '') {this.categoriaService.adicionarCategoria(data); this.atualizarCategorias(data)}
+          }
+        }  
+      ],
+    });
+
+    await alert.present();
   }
 
 }

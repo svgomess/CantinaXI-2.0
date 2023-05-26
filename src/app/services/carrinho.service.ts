@@ -10,6 +10,7 @@ export interface VendaDados {
   FkCliente: number
   FkFormaPagamento: number
   FkUsuario: string
+  Produtos: any[]
 }
 
 @Injectable({
@@ -18,6 +19,7 @@ export interface VendaDados {
 
 export class CarrinhoService {
   itensCarrinho: any[] = [];
+  private _options: any = { headers: new HttpHeaders({'Content-Type': 'application/json; charset=UTF-8'}) }
 
   constructor(
     private toastCtrl:ToastController,
@@ -25,6 +27,7 @@ export class CarrinhoService {
     private http:HttpClient) { }
 
   async adicionarCarrinho(produto: any){  
+
     let conteudo: any = {
       id: produto.Id,
       nome: produto.Nome,
@@ -32,6 +35,7 @@ export class CarrinhoService {
       quantia: 1
     }
 
+    produto.QtdEstoque--
     var checar = this.itensCarrinho.find(item => item.id === conteudo.id);
 
     if(!checar){
@@ -92,6 +96,29 @@ export class CarrinhoService {
     const alert = await this.alertCtrl.create({
       header: 'Confirmação',
       message: `Total da compra = ${formatCurrency(total, 'en-US', 'R$ ')}`,
+      inputs: [
+        {  
+          name: 'radio 1',  
+          type: 'radio',  
+          label: 'Genérico',  
+          value: 1,  
+          checked: true,  
+        },  
+        {  
+          name: 'radio 2',  
+          type: 'radio',  
+          label: 'Mensal',  
+          value: 2,  
+          disabled: true
+        },  
+        {  
+          name: 'radio 3',  
+          type: 'radio',  
+          label: 'Saldo',  
+          value: 3,  
+          disabled: true
+        }
+      ],
       buttons: [  
         {  
           text: 'CANCELAR',  
@@ -102,15 +129,16 @@ export class CarrinhoService {
         },  
         {  
           text: 'CONFIRMAR',  
-          handler: async () => { 
+          handler: async (pagamento: number) => { 
             const dadosVenda: VendaDados = {
               'ValorTotal': total,
-              'FkCliente': 2,
-              'FkFormaPagamento': 1,
-              'FkUsuario': 'Placeholder'
+              'FkCliente': 1,
+              'FkFormaPagamento': pagamento,
+              'FkUsuario': 'Placeholder',
+              'Produtos': this.itensCarrinho
             }
 
-            this.enviarVenda(dadosVenda)
+            this.enviarVenda(dadosVenda, this.itensCarrinho)
             this.itensCarrinho.splice(0); 
 
             const toast = await this.toastCtrl.create({
@@ -147,15 +175,17 @@ export class CarrinhoService {
   //   console.log(this.carrinhoComponent.itensCarrinho)
   // }
 
-  enviarVenda(venda: VendaDados): void{
-    this.cadastrarVenda(venda).subscribe(
-      (response) => console.log(response),
-      (error: any) => console.log(error),
-      () => console.log("Venda enviada")
-    )
+  enviarVenda(venda: VendaDados, produtos: any){
+    produtos.forEach(function(produto: any) {      
+      console.log(produto);
+    });
+
+    return this.http.post<VendaDados>(`${environment.baseUrl}/venda/inserir`, venda, this._options).subscribe(res => (
+      console.log(res)
+    ));
   }
 
-  cadastrarVenda(venda: VendaDados): Observable<VendaDados> {      
-    return this.http.post<VendaDados>(`${environment.baseUrl}/venda/inserir`, venda);
-  }
+  // cadastrarVenda(venda: VendaDados): Observable<any> {      
+  //   return this.http.post(`${environment.baseUrl}/venda/inserir`, JSON.stringify(venda), this._options);
+  // }
 }

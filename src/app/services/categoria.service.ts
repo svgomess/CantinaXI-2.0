@@ -23,4 +23,8 @@ export class CategoriaService {
   selecionarCategoria(id: string) {
     return this.http.get<ApiBase>(`${environment.baseUrl}/categoriaproduto/${id}`)
   }
+
+  adicionarCategoria(dados: any) {
+    return this.http.post(`${environment.baseUrl}/categoriaproduto/inserir`, dados).subscribe(res => (console.log(res)));
+  }
 }
