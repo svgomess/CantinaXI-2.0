@@ -33,4 +33,8 @@ export class ProdutoService {
   mostrarProduto(id: number) {
     return this.http.get<ApiBase>(`${environment.baseUrl}/produto/${id}`);
   }
+  
+  inserirProduto(dados: any) {
+    return this.http.post(`${environment.baseUrl}/produto/inserir`, dados).subscribe(res => (console.log(res)));
+  }
 }

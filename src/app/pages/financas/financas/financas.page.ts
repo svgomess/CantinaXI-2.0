@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { VendaService } from 'src/app/services/venda.service';
 
 @Component({
   selector: 'app-financas',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./financas.page.scss'],
 })
 export class FinancasPage implements OnInit {
+  totalDiario: any;
 
-  constructor() { }
+  constructor(
+    private vendaService:VendaService,
+    ) { }
 
   ngOnInit() {
+    this.vendaService.totalDiario().subscribe((res) => {
+      this.totalDiario = res.total.Total;
+    })
   }
 
 }

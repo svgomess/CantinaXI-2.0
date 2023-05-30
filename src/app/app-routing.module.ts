@@ -30,7 +30,15 @@ const routes: Routes = [
   {
     path: 'listaprodutos',
     loadChildren: () => import('./pages/pedidos/listaprodutos/listaprodutos.module').then( m => m.ListaprodutosPageModule)
-  }
+  },
+  {
+    path: 'criar-produto',
+    loadChildren: () => import('./pages/estoque/criar-produto/criar-produto.module').then( m => m.CriarProdutoPageModule)
+  },
+  // {
+  //   path: 'historico',
+  //   loadChildren: () => import('./pages/financas/historico/historico.module').then( m => m.HistoricoPageModule)
+  // }
 ];
 
 @NgModule({

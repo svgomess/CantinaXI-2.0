@@ -1,0 +1,58 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="tertiary">
+    <ion-title>Novo produto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar color="tertiary">
+      <ion-title size="large">Novo produto</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form [formGroup]="dadosForm" (ngSubmit)="enviar()">
+    <div class="ion-padding">
+      <ion-item>
+        <ion-input label="Nome do produto" labelPlacement="stacked" type="text" placeholder="Produto" formControlName="nome" required="true"></ion-input>
+      </ion-item>
+      <br/>
+      <ion-item>
+        <ion-input label="Preço" labelPlacement="stacked" type="number" placeholder="0.00" formControlName="preco"></ion-input>
+      </ion-item>
+      <br/>
+      <ion-item>
+        <ion-input label="Quantia no estoque" labelPlacement="stacked"  type="number" placeholder="0" formControlName="estoque"></ion-input>
+      </ion-item>
+      <br/>
+      <ion-item>
+        <ion-select label="Categoria" labelPlacement="stacked" placeholder="Selecione uma categoria" formControlName="categoria">
+          <ion-select-option *ngFor="let categoria of categorias" value= {{categoria.Id}} > {{ categoria.Nome }} </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <br/>
+      <ion-item>
+        <ion-select label="Fornecedor" labelPlacement="stacked" placeholder="Selecione o fornecedor" formControlName="fornecedor">
+          <ion-select-option *ngFor="let fornecedor of fornecedores" value= {{fornecedor.Id}} > {{ fornecedor.Nome }} </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+  
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="6">
+          <ion-button (click)="fechar()" expand="block" shape="round" color="danger">
+            <ion-icon slot="start" name="close-circle"></ion-icon>
+            Cancelar
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button expand="block" shape="round" color="success" type="submit">
+            <ion-icon slot="end" name="checkmark-circle"></ion-icon>
+            Confirmar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

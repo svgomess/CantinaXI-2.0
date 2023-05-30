@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
 import { CategoriaDados, CategoriaService } from 'src/app/services/categoria.service';
 import { ProdutoDados, ProdutoService } from 'src/app/services/produto.service';
+import { CriarProdutoPage } from '../criar-produto/criar-produto.page';
 
 @Component({
   selector: 'app-estoque',
@@ -14,6 +15,7 @@ export class EstoquePage implements OnInit {
 
   constructor(
     private produtoService: ProdutoService,
+    private modalCtrl: ModalController, 
     private categoriaService: CategoriaService, 
     private loadingCtrl: LoadingController) { }
 
@@ -38,6 +40,18 @@ export class EstoquePage implements OnInit {
       this.produtos.push(...res.dados);
       console.log(res.dados[1].Id);
     })
+  }
+
+  async criarProduto(){
+    const modal = await this.modalCtrl.create({
+      component: CriarProdutoPage,
+      componentProps: { value: 123 },
+      showBackdrop: true,
+      backdropDismiss: true,
+      cssClass: ['produto-modal']
+    })
+    await modal.present()
+    console.log("inserir novo produto")
   }
 
 }

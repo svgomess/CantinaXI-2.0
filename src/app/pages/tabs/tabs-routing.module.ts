@@ -23,7 +23,16 @@ const routes: Routes = [
       },
       {
         path: 'financas',
-        loadChildren: () => import('src/app/pages/financas/financas/financas.module').then(m => m.FinancasPageModule)
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('src/app/pages/financas/financas/financas.module').then(m => m.FinancasPageModule)
+          },
+          {
+            path: 'historico',
+            loadChildren: () => import('src/app/pages/financas/historico/historico.module').then(m => m.HistoricoPageModule)
+          },
+        ]
       },
       {
         path: 'estoque',

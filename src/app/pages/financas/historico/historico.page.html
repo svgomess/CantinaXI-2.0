@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/financas"></ion-back-button>
+    </ion-buttons>
+    <ion-title size="large"> Histórico de Vendas </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large"> Histórico de Vendas </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    <ion-card button *ngFor="let venda of vendas">
+      <ion-card-header>
+        <ion-card-subtitle> {{ venda.Data | date : 'cccc, d \'de\' MMMM \'ás\' H:mm' : '-06:00' : 'pt-BR' }} </ion-card-subtitle>
+        <ion-card-title> Total - {{ venda.ValorTotal | currency : 'R$ ' }} </ion-card-title>
+      </ion-card-header>
+    </ion-card>
+  </ion-list>
+
+</ion-content>
