@@ -4,6 +4,11 @@
       <ion-back-button defaultHref="/tabs/financas"></ion-back-button>
     </ion-buttons>
     <ion-title size="large"> Histórico de Vendas </ion-title>
+    <ion-buttons slot="end">
+      <ion-button id="date">
+        <ion-icon slot="icon-only" name="calendar"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -13,6 +18,16 @@
       <ion-title size="large"> Histórico de Vendas </ion-title>
     </ion-toolbar>
   </ion-header>
+
+    <ion-popover trigger="date">
+      <ng-template>
+        <ion-datetime presentation="date" [(ngModel)]="diaAtual"></ion-datetime>
+      </ng-template>
+    </ion-popover>
+
+  <ion-button expand="block" fill="outline" shape="round" class="ion-margin">
+    {{ diaAtual | date: 'cccc, d \'de\' MMMM' : '-06:00' : 'pt-BR' }}
+  </ion-button>
 
   <ion-list>
     <ion-card button *ngFor="let venda of vendas">

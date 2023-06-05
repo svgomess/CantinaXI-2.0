@@ -28,6 +28,10 @@ export class VendaService {
     return this.http.get<ApiBase>(`${environment.baseUrl}/venda`);
   }
 
+  listarVendaData(data: any): Observable<ApiBase> {
+    return this.http.get<ApiBase>(`${environment.baseUrl}/venda/data/${data}`);
+  }
+
   totalDiario(): Observable<any> {
     return this.http.get<any>(`${environment.baseUrl}/venda/totalDiario`)
   }

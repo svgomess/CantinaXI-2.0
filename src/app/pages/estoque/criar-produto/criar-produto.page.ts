@@ -94,6 +94,7 @@ export class CriarProdutoPage implements OnInit {
       'FkFornecedor': this.dadosForm.value.fornecedor,
       'FkUsuario': 'Placeholder',
       'FkCategoria': this.dadosForm.value.categoria,
+      'FkImagem': 1
     }
 
     this.produtoService.inserirProduto(dadosProduto)

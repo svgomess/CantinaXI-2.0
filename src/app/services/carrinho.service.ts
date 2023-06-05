@@ -1,9 +1,10 @@
 import { CurrencyPipe, DecimalPipe, formatCurrency, formatNumber } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { ConfirmarPage } from '../pages/pedidos/confirmar/confirmar.page';
 
 export interface VendaDados {
   ValorTotal: number
@@ -24,6 +25,7 @@ export class CarrinhoService {
   constructor(
     private toastCtrl:ToastController,
     private alertCtrl: AlertController,
+    private modalCtrl: ModalController,
     private http:HttpClient) { }
 
   async adicionarCarrinho(produto: any){  
@@ -93,66 +95,77 @@ export class CarrinhoService {
   async confirmarCarrinho(){
     let total: number = this.calcularTotal()
 
-    const alert = await this.alertCtrl.create({
-      header: 'Confirmação',
-      message: `Total da compra = ${formatCurrency(total, 'en-US', 'R$ ')}`,
-      inputs: [
-        {  
-          name: 'radio 1',  
-          type: 'radio',  
-          label: 'Genérico',  
-          value: 1,  
-          checked: true,  
-        },  
-        {  
-          name: 'radio 2',  
-          type: 'radio',  
-          label: 'Mensal',  
-          value: 2,  
-          disabled: true
-        },  
-        {  
-          name: 'radio 3',  
-          type: 'radio',  
-          label: 'Saldo',  
-          value: 3,  
-          disabled: true
-        }
-      ],
-      buttons: [  
-        {  
-          text: 'CANCELAR',  
-          role: 'cancel',  
-          handler: () => {  
-            console.log('Compra cancelada');  
-          }  
-        },  
-        {  
-          text: 'CONFIRMAR',  
-          handler: async (pagamento: number) => { 
-            const dadosVenda: VendaDados = {
-              'ValorTotal': total,
-              'FkCliente': 1,
-              'FkFormaPagamento': pagamento,
-              'FkUsuario': 'Placeholder',
-              'Produtos': this.itensCarrinho
-            }
+    const modal = await this.modalCtrl.create({
+      component: ConfirmarPage,
+      componentProps: { total: total },
+      showBackdrop: true,
+      backdropDismiss: true,
+      cssClass: ['venda-modal']
+    })
 
-            this.enviarVenda(dadosVenda, this.itensCarrinho)
-            this.itensCarrinho.splice(0); 
+    await modal.present()
+    console.log(total)
 
-            const toast = await this.toastCtrl.create({
-              message: `Compra realizada com sucesso`,
-              duration: 1000,
-              position: 'bottom',
-            });
-            await toast.present(); 
-          }  
-        }  
-      ]  ,
-    });
+    // const alert = await this.alertCtrl.create({
+    //   header: 'Confirmação',
+    //   message: `Total da compra = ${formatCurrency(total, 'en-US', 'R$ ')}`,
+    //   inputs: [
+    //     {  
+    //       name: 'radio 1',  
+    //       type: 'radio',  
+    //       label: 'Genérico',  
+    //       value: 1,  
+    //       checked: true,  
+    //     },  
+    //     {  
+    //       name: 'radio 2',  
+    //       type: 'radio',  
+    //       label: 'Mensal',  
+    //       value: 2,  
+    //       disabled: true
+    //     },  
+    //     {  
+    //       name: 'radio 3',  
+    //       type: 'radio',  
+    //       label: 'Saldo',  
+    //       value: 3,  
+    //       disabled: true
+    //     }
+    //   ],
+    //   buttons: [  
+    //     {  
+    //       text: 'CANCELAR',  
+    //       role: 'cancel',  
+    //       handler: () => {  
+    //         console.log('Compra cancelada');  
+    //       }  
+    //     },  
+    //     {  
+    //       text: 'CONFIRMAR',  
+    //       handler: async (pagamento: number) => { 
+    //         const dadosVenda: VendaDados = {
+    //           'ValorTotal': total,
+    //           'FkCliente': 1,
+    //           'FkFormaPagamento': pagamento,
+    //           'FkUsuario': 'Placeholder',
+    //           'Produtos': this.itensCarrinho
+    //         }
 
-    await alert.present();
+    //         this.enviarVenda(dadosVenda, this.itensCarrinho)
+    //         this.itensCarrinho.splice(0); 
+
+    //         const toast = await this.toastCtrl.create({
+    //           message: `Compra realizada com sucesso`,
+    //           duration: 1000,
+    //           position: 'bottom',
+    //         });
+    //         await toast.present(); 
+    //       }  
+    //     }  
+    //   ]  ,
+    // });
+
+    // await alert.present();
 
   }
 

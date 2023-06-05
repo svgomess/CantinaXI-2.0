@@ -4,6 +4,13 @@ import { CategoriaDados, CategoriaService } from 'src/app/services/categoria.ser
 import { ProdutoDados, ProdutoService } from 'src/app/services/produto.service';
 import { CriarProdutoPage } from '../criar-produto/criar-produto.page';
 
+export interface ListagemDados {
+  Nome: string,
+  Preco: string,
+  Estoque: number,
+  Categoria: string
+}
+
 @Component({
   selector: 'app-estoque',
   templateUrl: './estoque.page.html',
@@ -12,6 +19,8 @@ import { CriarProdutoPage } from '../criar-produto/criar-produto.page';
 export class EstoquePage implements OnInit {
   produtos: ProdutoDados[] = [];
   categorias: CategoriaDados[] = [];
+
+  listagem: ListagemDados[] = [];
 
   constructor(
     private produtoService: ProdutoService,
@@ -38,7 +47,7 @@ export class EstoquePage implements OnInit {
     this.produtoService.listarProdutos().subscribe((res) => {
       loading.dismiss();
       this.produtos.push(...res.dados);
-      console.log(res.dados[1].Id);
+      console.log(this.produtos)
     })
   }
 
@@ -54,4 +63,7 @@ export class EstoquePage implements OnInit {
     console.log("inserir novo produto")
   }
 
+  resetarPagina(){
+    window.location.reload()
+  }
 }

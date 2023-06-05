@@ -35,6 +35,10 @@ const routes: Routes = [
     path: 'criar-produto',
     loadChildren: () => import('./pages/estoque/criar-produto/criar-produto.module').then( m => m.CriarProdutoPageModule)
   },
+  {
+    path: 'confirmar',
+    loadChildren: () => import('./pages/pedidos/confirmar/confirmar.module').then( m => m.ConfirmarPageModule)
+  },
   // {
   //   path: 'historico',
   //   loadChildren: () => import('./pages/financas/historico/historico.module').then( m => m.HistoricoPageModule)

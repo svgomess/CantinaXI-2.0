@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ToastController } from '@ionic/angular';
 import { CarrinhoService } from 'src/app/services/carrinho.service';
-import { CategoriaDados, CategoriaService } from 'src/app/services/categoria.service';
+import { CategoriaService } from 'src/app/services/categoria.service';
 import { ProdutoDados, ProdutoService } from 'src/app/services/produto.service';
 
 @Component({
@@ -25,13 +24,7 @@ export class ListaprodutosPage implements OnInit {
   ngOnInit() {
     this.categoriaService.selecionarCategoria(this.idCategoria).subscribe((res) => {
       this.categoria = res.dados;
-    })
-    // this.categoriaService.listarCategorias().subscribe((res) => {
-    //   res.dados.forEach(categoria => {
-    //     categoria.Id === this.idCategoria ? this.categoria = categoria.Nome : null
-    //   });
-    //   console.log(this.categoria);
-    // })
+    }) 
     
     this.produtoService.listarProdutos().subscribe((res) => {
       res.dados.forEach(produto => {

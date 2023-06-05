@@ -17,13 +17,13 @@
   </ion-header>
 
   <ion-list>
-      <ion-item button *ngFor="let dados of produtos, let i = index" [routerLink]="[dados.Id]" [disabled]="dados.QtdEstoque == '0' ? true : false">
+      <ion-item button *ngFor="let dados of produtos, let i = index" [routerLink]="[dados.Id]" [class.fora-de-estoque]="dados.QtdEstoque == '0'">
         <ion-avatar slot="start">
           <img src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
         </ion-avatar>
         <ion-label>
           {{ dados.Nome }}
-          <p>{{ categorias[dados.FkCategoria - 1].Nome }} · R$ {{ dados.Preco }}</p>
+          <p>{{ dados.Categoria }} · R$ {{ dados.Preco }}</p>
         </ion-label>
         <ion-chip slot="end">{{ dados.QtdEstoque }}</ion-chip>
       </ion-item>

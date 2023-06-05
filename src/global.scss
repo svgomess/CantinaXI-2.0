@@ -27,7 +27,43 @@
 
 
 .produto-modal {
-    --height: 75% !important;
     padding: 30px;
     background: rgba(0,0,0,0.5);
+    --height: 75% !important;
+    --border-radius: 6px;
+    --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
   }
+  
+.venda-modal {
+  padding: 30px;
+  background: rgba(0,0,0,0.5);
+  --height: 75%;
+  --border-radius: 6px;
+  --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
+}
+
+.fora-de-estoque{
+	opacity: .5;
+}
+
+// ion-modal#venda-modal {
+// }
+
+// ion-modal#venda-modal h1 {
+//   margin: 20px 20px 10px 20px;
+// }
+
+// ion-modal#venda-modal ion-icon {
+//   margin-right: 6px;
+
+//   width: 48px;
+//   height: 48px;
+
+//   padding: 4px 0;
+
+//   color: #aaaaaa;
+// }
+
+// ion-modal#venda-modal .wrapper {
+//   margin-bottom: 10px;
+// }

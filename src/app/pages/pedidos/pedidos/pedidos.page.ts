@@ -29,6 +29,7 @@ export class PedidosPage implements OnInit {
 
     this.categoriaService.listarCategorias().subscribe((res) => {
       loading.dismiss();
+      this.categorias.splice(0)
       this.categorias.push(...res.dados);
       console.log(this.categorias);
     })
@@ -71,7 +72,7 @@ export class PedidosPage implements OnInit {
         {  
           text: 'CONFIRMAR',  
           handler: async (data: any) => { 
-            if(data.Nome != '') {this.categoriaService.adicionarCategoria(data); this.atualizarCategorias(data)}
+            if(data.Nome != '') {this.categoriaService.adicionarCategoria(data); this.ngOnInit()}
           }
         }  
       ],

@@ -17,6 +17,8 @@ export interface ProdutoDados {
   FkUsuario: string
   FkFornecedor: string
   FkCategoria: number
+  Categoria: string
+  FkImagem: number
 }
 
 @Injectable({
@@ -36,5 +38,9 @@ export class ProdutoService {
   
   inserirProduto(dados: any) {
     return this.http.post(`${environment.baseUrl}/produto/inserir`, dados).subscribe(res => (console.log(res)));
+  }
+
+  atualizarProduto(id: number, campo: string, alteracao: any) {
+    return this.http.get(`${environment.baseUrl}/produto/${id}/atualizar/${campo}/${alteracao}`).subscribe(res => (console.log(res)));
   }
 }

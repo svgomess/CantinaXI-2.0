@@ -1,0 +1,60 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="tertiary">
+    <ion-title>Confirmar venda</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-card expand="block" fill="outline" shape="round">
+    <ion-card-header>
+      <ion-card-subtitle class="ion-text-center">Total</ion-card-subtitle>
+      <ion-card-title class="ion-text-center">{{ total | currency:'R$ ' }}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <form [formGroup]="dadosForm" (ngSubmit)="enviar()">
+    <ion-list>
+      <ion-radio-group value="generico" formControlName="formaPagamento">
+          <ion-item>
+            <ion-radio value="generico" (click)="determinarRadio(0)" labelPlacement="start">Genérico</ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-radio value="mensal" (click)="determinarRadio(1)" labelPlacement="start">Mensal</ion-radio>
+          </ion-item>
+          <ion-item [disabled]="radioSelecionado == 1 ? false : true">
+            <ion-select value="mensalista" placeholder="Escolha o mensalista" formControlName="clienteMensal">
+              <ion-select-option *ngFor="let cliente of mensalistas" [value]="radioSelecionado == 1 ? cliente.Id : 'Escolha o mensalista'" > {{ cliente.Nome }} </ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-radio value="saldo" (click)="determinarRadio(2)" labelPlacement="start">Saldo</ion-radio>
+          </ion-item>
+          <ion-item [disabled]="radioSelecionado == 2 ? false : true">
+            <ion-select value="saldista" placeholder="Escolha o saldo" formControlName="clienteSaldo">
+              <ion-select-option *ngFor="let cliente of saldos" [value]="radioSelecionado == 2 ? cliente.Id : 'Escolha o saldo'" > {{ cliente.Nome }} </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-radio-group>
+    </ion-list>
+
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="6">
+          <ion-button (click)="fechar()" expand="block" fill="outline" shape="round" color="danger">
+            Cancelar
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button expand="block" fill="outline" shape="round" color="success" type="submit">
+            Confirmar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
+
+
