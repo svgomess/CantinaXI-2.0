@@ -23,18 +23,18 @@
           <ion-item>
             <ion-radio value="mensal" (click)="determinarRadio(1)" labelPlacement="start">Mensal</ion-radio>
           </ion-item>
-          <ion-item [disabled]="radioSelecionado == 1 ? false : true">
+          <ion-item [disabled]="radioSelecionado === 1 ? false : true">
             <ion-select value="mensalista" placeholder="Escolha o mensalista" formControlName="clienteMensal">
-              <ion-select-option *ngFor="let cliente of mensalistas" [value]="radioSelecionado == 1 ? cliente.Id : 'Escolha o mensalista'" > {{ cliente.Nome }} </ion-select-option>
+              <ion-select-option *ngFor="let cliente of mensalistas" [value]="radioSelecionado === 1 ? cliente.Id : 'Escolha o mensalista'" > {{ cliente.Nome }} </ion-select-option>
             </ion-select>
           </ion-item>
 
           <ion-item>
             <ion-radio value="saldo" (click)="determinarRadio(2)" labelPlacement="start">Saldo</ion-radio>
           </ion-item>
-          <ion-item [disabled]="radioSelecionado == 2 ? false : true">
+          <ion-item [disabled]="radioSelecionado === 2 ? false : true">
             <ion-select value="saldista" placeholder="Escolha o saldo" formControlName="clienteSaldo">
-              <ion-select-option *ngFor="let cliente of saldos" [value]="radioSelecionado == 2 ? cliente.Id : 'Escolha o saldo'" [disabled]="+cliente.Saldo < this.total  ? true : false"> {{ cliente.Nome }} </ion-select-option>
+              <ion-select-option *ngFor="let cliente of saldos" [value]="radioSelecionado === 2 ? cliente.Id : 'Escolha o saldo'" [disabled]="+cliente.Saldo < this.total  ? true : false"> {{ cliente.Nome }} </ion-select-option>
             </ion-select>
           </ion-item>
         </ion-radio-group>
