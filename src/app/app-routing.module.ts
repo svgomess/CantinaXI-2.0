@@ -39,6 +39,14 @@ const routes: Routes = [
     path: 'confirmar',
     loadChildren: () => import('./pages/pedidos/confirmar/confirmar.module').then( m => m.ConfirmarPageModule)
   },
+  {
+    path: 'mensalistas',
+    loadChildren: () => import('./pages/financas/mensalistas/mensalistas.module').then( m => m.MensalistasPageModule)
+  },
+  {
+    path: 'saldos',
+    loadChildren: () => import('./pages/financas/saldos/saldos.module').then( m => m.SaldosPageModule)
+  },
   // {
   //   path: 'historico',
   //   loadChildren: () => import('./pages/financas/historico/historico.module').then( m => m.HistoricoPageModule)

@@ -9,6 +9,7 @@ export interface ClienteDados {
   Categoria: string
   Periodo: string
   FkAno: string
+  Saldo: string
 }
 
 @Injectable({

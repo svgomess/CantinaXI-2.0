@@ -32,6 +32,14 @@ const routes: Routes = [
             path: 'historico',
             loadChildren: () => import('src/app/pages/financas/historico/historico.module').then(m => m.HistoricoPageModule)
           },
+          {
+            path: 'mensalistas',
+            loadChildren: () => import('src/app/pages/financas/mensalistas/mensalistas.module').then(m => m.MensalistasPageModule)
+          },
+          {
+            path: 'saldos',
+            loadChildren: () => import('src/app/pages/financas/saldos/saldos.module').then(m => m.SaldosPageModule)
+          },
         ]
       },
       {

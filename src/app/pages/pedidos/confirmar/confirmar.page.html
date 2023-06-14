@@ -34,7 +34,7 @@
           </ion-item>
           <ion-item [disabled]="radioSelecionado == 2 ? false : true">
             <ion-select value="saldista" placeholder="Escolha o saldo" formControlName="clienteSaldo">
-              <ion-select-option *ngFor="let cliente of saldos" [value]="radioSelecionado == 2 ? cliente.Id : 'Escolha o saldo'" > {{ cliente.Nome }} </ion-select-option>
+              <ion-select-option *ngFor="let cliente of saldos" [value]="radioSelecionado == 2 ? cliente.Id : 'Escolha o saldo'" [disabled]="+cliente.Saldo < this.total  ? true : false"> {{ cliente.Nome }} </ion-select-option>
             </ion-select>
           </ion-item>
         </ion-radio-group>

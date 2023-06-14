@@ -16,6 +16,7 @@ export interface ProdutoDados {
   QtdEstoque: string
   FkUsuario: string
   FkFornecedor: string
+  Fornecedor: string
   FkCategoria: number
   Categoria: string
   FkImagem: number
