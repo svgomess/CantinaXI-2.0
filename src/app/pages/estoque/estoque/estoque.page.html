@@ -17,7 +17,7 @@
   </ion-header>
 
   <ion-list>
-      <ion-item button *ngFor="let dados of produtos, let i = index" [routerLink]="[dados.Id]" [class.fora-de-estoque]="dados.QtdEstoque == '0'">
+      <ion-item button *ngFor="let dados of produtos, let i = index" [routerLink]="[dados.Id]" [class.fora-de-estoque]="dados.QtdEstoque === '0'">
         <ion-avatar slot="start">
           <img src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
         </ion-avatar>

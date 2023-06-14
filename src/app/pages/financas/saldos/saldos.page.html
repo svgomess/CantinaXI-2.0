@@ -15,7 +15,7 @@
   </ion-header>
 
   <ion-list>
-    <ion-card *ngFor="let cliente of saldos" [disabled]="cliente.Saldo == '0.00' ? true : false">
+    <ion-card *ngFor="let cliente of saldos" [disabled]="cliente.Saldo === '0.00' ? true : false">
       <ion-card-header>
         <ion-card-title> {{ cliente.Nome }} </ion-card-title>
         <ion-card-subtitle>  Saldo atual: {{ cliente.Saldo | currency : 'R$ ' }}</ion-card-subtitle>

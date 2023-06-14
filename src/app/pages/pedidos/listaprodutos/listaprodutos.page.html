@@ -15,7 +15,7 @@
   </ion-header>
 
   <ion-list>
-    <ion-item button *ngFor="let item of produtos; let i = index" (click)="carrinhoService.adicionarCarrinho(item)" [disabled]="item.QtdEstoque == '0' ? true : false">
+    <ion-item button *ngFor="let item of produtos; let i = index" (click)="carrinhoService.adicionarCarrinho(item)" [disabled]="item.QtdEstoque === '0' ? true : false">
       <ion-avatar slot="start">
         <img src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
       </ion-avatar>
