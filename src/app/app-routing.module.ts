@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'pedidos',
+    redirectTo: 'admin',
     pathMatch: 'full'
   },
   // {
@@ -46,6 +46,14 @@ const routes: Routes = [
   {
     path: 'saldos',
     loadChildren: () => import('./pages/financas/saldos/saldos.module').then( m => m.SaldosPageModule)
+  },
+  {
+    path: 'criar-cliente',
+    loadChildren: () => import('./pages/financas/criar-cliente/criar-cliente.module').then( m => m.CriarClientePageModule)
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./pages/usuario/admin/admin.module').then( m => m.AdminPageModule)
   },
   // {
   //   path: 'historico',

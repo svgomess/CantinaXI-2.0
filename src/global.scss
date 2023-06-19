@@ -26,7 +26,7 @@
 @import "@ionic/angular/css/flex-utils.css";
 
 
-.produto-modal {
+.modal-75 {
     padding: 30px;
     background: rgba(0,0,0,0.5);
     --height: 75% !important;
@@ -34,10 +34,10 @@
     --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
   }
   
-.venda-modal {
+.modal-65 {
   padding: 30px;
   background: rgba(0,0,0,0.5);
-  --height: 75%;
+  --height: 65%;
   --border-radius: 6px;
   --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
 }

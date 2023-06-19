@@ -100,73 +100,11 @@ export class CarrinhoService {
       componentProps: { total: total },
       showBackdrop: true,
       backdropDismiss: true,
-      cssClass: ['venda-modal']
+      cssClass: ['modal-75']
     })
 
     await modal.present()
     console.log(total)
-
-    // const alert = await this.alertCtrl.create({
-    //   header: 'Confirmação',
-    //   message: `Total da compra = ${formatCurrency(total, 'en-US', 'R$ ')}`,
-    //   inputs: [
-    //     {  
-    //       name: 'radio 1',  
-    //       type: 'radio',  
-    //       label: 'Genérico',  
-    //       value: 1,  
-    //       checked: true,  
-    //     },  
-    //     {  
-    //       name: 'radio 2',  
-    //       type: 'radio',  
-    //       label: 'Mensal',  
-    //       value: 2,  
-    //       disabled: true
-    //     },  
-    //     {  
-    //       name: 'radio 3',  
-    //       type: 'radio',  
-    //       label: 'Saldo',  
-    //       value: 3,  
-    //       disabled: true
-    //     }
-    //   ],
-    //   buttons: [  
-    //     {  
-    //       text: 'CANCELAR',  
-    //       role: 'cancel',  
-    //       handler: () => {  
-    //         console.log('Compra cancelada');  
-    //       }  
-    //     },  
-    //     {  
-    //       text: 'CONFIRMAR',  
-    //       handler: async (pagamento: number) => { 
-    //         const dadosVenda: VendaDados = {
-    //           'ValorTotal': total,
-    //           'FkCliente': 1,
-    //           'FkFormaPagamento': pagamento,
-    //           'FkUsuario': 'Placeholder',
-    //           'Produtos': this.itensCarrinho
-    //         }
-
-    //         this.enviarVenda(dadosVenda, this.itensCarrinho)
-    //         this.itensCarrinho.splice(0); 
-
-    //         const toast = await this.toastCtrl.create({
-    //           message: `Compra realizada com sucesso`,
-    //           duration: 1000,
-    //           position: 'bottom',
-    //         });
-    //         await toast.present(); 
-    //       }  
-    //     }  
-    //   ]  ,
-    // });
-
-    // await alert.present();
-
   }
 
   calcularTotal(){
@@ -183,11 +121,6 @@ export class CarrinhoService {
     return total
   }
 
-  // conteudoCarrinho(id: number){
-  //   this.carrinhoComponent.itensCarrinho.push(this.produtos[id].Id)
-  //   console.log(this.carrinhoComponent.itensCarrinho)
-  // }
-
   enviarVenda(venda: VendaDados, produtos: any){
     produtos.forEach(function(produto: any) {      
       console.log(produto);
@@ -197,8 +130,4 @@ export class CarrinhoService {
       console.log(res)
     ));
   }
-
-  // cadastrarVenda(venda: VendaDados): Observable<any> {      
-  //   return this.http.post(`${environment.baseUrl}/venda/inserir`, JSON.stringify(venda), this._options);
-  // }
 }

@@ -23,16 +23,4 @@ export class CarrinhoPage implements OnInit {
     this.modalCtrl.dismiss()
   }
 
-  async mostrarConfirmacao(){
-    const modal = await this.modalCtrl.create({
-      component: ConfirmarPage,
-      componentProps: { value: 123 },
-      showBackdrop: true,
-      backdropDismiss: true,
-      cssClass: ['venda-modal']
-    })
-    await modal.present()
-    console.log("inserir novo produto")
-  }
-
 }

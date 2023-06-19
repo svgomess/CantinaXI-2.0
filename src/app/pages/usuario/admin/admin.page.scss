@@ -1,0 +1,91 @@
+// .conteudo{
+//     width: 100%;
+//     height: 100%;
+//     background-color: chartreuse !important;
+// }
+
+.bg{
+    background-image: url(../../../../assets/icon/bg_xi.png);
+    animation: movimento 20s linear 0s infinite normal forwards;
+    height: 100%;
+}
+
+.conteudo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(to bottom, #ec6708, #00000000, #00000000, #00000000, #00000000, #00000000, #00000000, #ec6708);
+    height: 100%;
+
+    .logo{
+        width: 100%;
+        padding: 0;
+        animation: fade 1s ease 0s normal forwards;
+    }
+
+    .botoes{
+        margin: 0;
+        padding: 0;
+    }
+
+    ion-card{
+        box-shadow: 0px 0px 45px -15px rgba(0,0,0,1);
+        background-color: #222222;
+        justify-content: center;
+    }
+}
+
+.bold{
+    font-weight: bold;
+    color: white;
+    padding-bottom: 1rem;
+}
+
+.coluna-1{
+    border-right: .5px dashed #ffffff33;
+}
+
+.coluna-2{
+    border-left: .5px dashed #ffffff33;
+}
+
+.icone{
+    width: 100%;
+    padding: 1.5rem;
+    animation: scale 1s ease 0s normal forwards;
+}
+
+@keyframes movimento {
+	0% {
+		background-position: 0% 0%;
+	}
+
+	100% {
+		background-position: 100% 100%;
+	}
+}
+
+@keyframes fade {
+	0% {
+		opacity: 0;
+		transform: translateX(-50px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes scale {
+	0% {
+		opacity: 0;
+		transform: scale(0);
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}

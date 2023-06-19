@@ -57,7 +57,7 @@ export class EstoquePage implements OnInit {
       componentProps: { value: 123 },
       showBackdrop: true,
       backdropDismiss: true,
-      cssClass: ['produto-modal']
+      cssClass: ['modal-75']
     })
     await modal.present()
     console.log("inserir novo produto")

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { ClienteDados, ClienteService } from 'src/app/services/cliente.service';
+import { CriarClientePage } from '../criar-cliente/criar-cliente.page';
 
 @Component({
   selector: 'app-saldos',
@@ -10,6 +12,7 @@ export class SaldosPage implements OnInit {
   saldos: ClienteDados[] = [];
 
   constructor(
+    private modalCtrl: ModalController, 
     private clienteService: ClienteService
   ) { }
 
@@ -26,4 +29,14 @@ export class SaldosPage implements OnInit {
     })
   }
 
+  async criarNovoSaldo() {
+    const modal = await this.modalCtrl.create({
+      component: CriarClientePage,
+      componentProps: { value: 123 },
+      showBackdrop: true,
+      backdropDismiss: true,
+      cssClass: ['modal-65']
+    })
+    await modal.present()
+  }
 }

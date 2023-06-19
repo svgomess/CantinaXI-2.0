@@ -22,4 +22,8 @@ export class ClienteService {
   listarClientes(): Observable<any> {
     return this.http.get(`${environment.baseUrl}/cliente`);
   }
+  
+  adicionarCliente(dados: any) {
+    return this.http.post(`${environment.baseUrl}/cliente/inserir`, dados).subscribe(res => (console.log(res)));
+  }
 }
