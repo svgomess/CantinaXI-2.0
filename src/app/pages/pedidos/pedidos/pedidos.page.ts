@@ -10,6 +10,9 @@ import { CategoriaDados, CategoriaService } from 'src/app/services/categoria.ser
 })
 export class PedidosPage implements OnInit {
   categorias: CategoriaDados[] = [];
+  checado = false;
+  vendedor = localStorage.getItem('vendedor');
+
   constructor(
     private categoriaService:CategoriaService,
     private modalCtrl: ModalController, 
@@ -17,7 +20,24 @@ export class PedidosPage implements OnInit {
     private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
+    if(localStorage.getItem('tema') != 'light'){
+      this.checado = true;
+      document.body.setAttribute('color-theme', 'dark');
+      localStorage.setItem('tema', 'dark');
+    }
+
     this.carregarCategorias();
+  }
+
+  alterarTema(event: any){
+    console.log(event.detail.checked)
+    if(event.detail.checked){
+      document.body.setAttribute('color-theme', 'dark');
+      localStorage.setItem('tema', 'dark');
+    } else {
+      document.body.setAttribute('color-theme', 'light');
+      localStorage.setItem('tema', 'light');
+    }
   }
 
   async carregarCategorias(){

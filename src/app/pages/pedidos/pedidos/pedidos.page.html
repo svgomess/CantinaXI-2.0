@@ -2,7 +2,9 @@
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-button>
-        <ion-icon slot="icon-only" name="menu"></ion-icon>
+        <ion-menu-button>
+          <ion-icon slot="icon-only" name="menu"></ion-icon>
+        </ion-menu-button>
       </ion-button>
     </ion-buttons>
     <ion-title>Pedidos</ion-title>
@@ -15,7 +17,32 @@
   </ion-fab-button>
 </ion-fab>
 
-<ion-content [fullscreen]="true">
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar color="secondary">
+      <div class="menu-bar">
+        <img src="../../../../assets/icon/white.svg" alt="Logo colégio XI" class="logo">
+      </div>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item>
+        <ion-label>Vendedor</ion-label>
+        <p class="fora-de-estoque"> {{vendedor}} </p>
+      </ion-item>
+      <ion-item>
+        <ion-toggle (ionChange)="alterarTema($event)" justify="space-between" checked={{checado}}>Modo noturno</ion-toggle>
+      </ion-item>
+      <ion-item button [routerLink]="['../../']">
+        <ion-icon name="exit" slot="end" color="danger"></ion-icon>
+        <ion-label>Sair</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-content [fullscreen]="true" id="main-content">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Pedidos</ion-title>
