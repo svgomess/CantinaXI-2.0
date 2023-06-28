@@ -55,6 +55,10 @@ const routes: Routes = [
     path: 'admin',
     loadChildren: () => import('./pages/usuario/admin/admin.module').then( m => m.AdminPageModule)
   },
+  {
+    path: 'vendedores',
+    loadChildren: () => import('./pages/vendedores/vendedores.module').then( m => m.VendedoresPageModule)
+  }
   // {
   //   path: 'historico',
   //   loadChildren: () => import('./pages/financas/historico/historico.module').then( m => m.HistoricoPageModule)

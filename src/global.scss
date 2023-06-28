@@ -42,9 +42,28 @@
   --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
 }
 
+.modal-55 {
+  padding: 30px;
+  background: rgba(0,0,0,0.5);
+  --height: 55%;
+  --border-radius: 6px;
+  --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
+}
+
 .fora-de-estoque{
 	opacity: .5;
 }
+
+.logo{
+  width: 50%;
+  justify-self: center;
+}
+
+.menu-bar{
+  display: flex;
+  justify-content: center;
+}
+
 
 // ion-modal#venda-modal {
 // }

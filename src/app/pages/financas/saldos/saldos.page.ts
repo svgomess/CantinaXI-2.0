@@ -18,7 +18,6 @@ export class SaldosPage implements OnInit {
 
   ngOnInit() {
     this.carregarClientes();
-    console.log(this.saldos)
   }
   
   carregarClientes() {

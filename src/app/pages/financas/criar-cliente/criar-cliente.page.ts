@@ -23,7 +23,6 @@ export class CriarClientePage implements OnInit {
 
   ngOnInit() {
     this.carregarAnos()
-    console.log(this.anos)
 
     this.dadosForm = new FormGroup({
       nome: new FormControl('', Validators.required),
@@ -83,5 +82,6 @@ export class CriarClientePage implements OnInit {
     }
 
     this.clienteService.adicionarCliente(dadosCliente)
+    location.href = '/tabs/financas/saldos';
   }
 }

@@ -1,26 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, LoadingController, ModalController } from '@ionic/angular';
-import { CarrinhoPage } from 'src/app/pages/pedidos/carrinho/carrinho.page'
-import { CategoriaDados, CategoriaService } from 'src/app/services/categoria.service';
+import { AlertController, LoadingController, ModalController, ToastController } from '@ionic/angular';
+import { AdminService } from 'src/app/services/admin.service';
+import { AdicionarVendedorPage } from '../adicionar-vendedor/adicionar-vendedor.page';
 
 @Component({
-  selector: 'app-pedidos',
-  templateUrl: './pedidos.page.html',
-  styleUrls: ['./pedidos.page.scss'],
+  selector: 'app-vendedores',
+  templateUrl: './vendedores.page.html',
+  styleUrls: ['./vendedores.page.scss'],
 })
-export class PedidosPage implements OnInit {
-  categorias: CategoriaDados[] = [];
-  vendedor = localStorage.getItem('vendedor');
+export class VendedoresPage implements OnInit {
   admin = localStorage.getItem('administrador');
-  gerenciamento = localStorage.getItem('gerenciamento');
+  vendedores: any = [];
   checadoTema = false;
   checadoEditor = false;
 
   constructor(
-    private categoriaService:CategoriaService,
+    private adminService: AdminService,
     private modalCtrl: ModalController, 
     private alertCtrl: AlertController,
-    private loadingCtrl: LoadingController) { }
+    private toastCtrl: ToastController,
+    private loadingCtrl: LoadingController
+    ) { }
 
   ngOnInit() {
     if(localStorage.getItem('tema') != 'light'){
@@ -33,8 +33,8 @@ export class PedidosPage implements OnInit {
       this.checadoEditor = true;
       localStorage.setItem('gerenciamento', 'true');
     }
-
-    this.carregarCategorias();
+    
+    this.carregarVendedores();
   }
 
   alterarTema(event: any){
@@ -56,44 +56,44 @@ export class PedidosPage implements OnInit {
     }
   }
 
-  async carregarCategorias(){
+  async carregarVendedores(){
     const loading = await this.loadingCtrl.create({
       message: 'Carregando...',
       spinner: 'circles'
     });
     await loading.present();
 
-    this.categoriaService.listarCategorias().subscribe((res) => {
+    this.adminService.listarVendedores().subscribe((res) => {
       loading.dismiss();
-      this.categorias.splice(0)
-      this.categorias.push(...res.dados);
+      this.vendedores.splice(0)
+      this.vendedores.push(...res);
     })
   }
 
-  async atualizarCategorias(data: any){
-    this.categorias.push(data)
-  }
-
-  async mostrarCarrinho(){
+  async adicionarVendedor(){
     const modal = await this.modalCtrl.create({
-      component: CarrinhoPage,
-      breakpoints: [0.5, 1],
-      initialBreakpoint: 0.5,
-      handle: false
+      component: AdicionarVendedorPage,
+      componentProps: { value: 123 },
+      showBackdrop: true,
+      backdropDismiss: true,
+      cssClass: ['modal-55']
     })
     await modal.present()
   }
 
-  async criarCategoriaAlert(){
+  async toastRemover(){
+    const toast = await this.toastCtrl.create({
+      message: `Vendedor removido com sucesso.`,
+      duration: 1000,
+      position: 'bottom',
+    });
+    await toast.present();
+  }
+
+  async removerVendedor(login: any){
     const alert = await this.alertCtrl.create({
-      header: 'Criar categoria',
-      inputs: [
-        {  
-          name: 'Nome',  
-          type: 'text',  
-          placeholder: 'Nome da categoria'
-        }
-      ],
+      header: 'Atenção',
+      message: 'Deseja mesmo remover este vendedor?',
       buttons: [  
         {  
           text: 'CANCELAR',  
@@ -102,9 +102,12 @@ export class PedidosPage implements OnInit {
           }  
         },  
         {  
-          text: 'CONFIRMAR',  
-          handler: async (data: any) => { 
-            if(data.Nome != '') {this.categoriaService.adicionarCategoria(data); this.ngOnInit()}
+          text: 'CONFIRMAR',
+          role: 'confirm',  
+          handler: () => { 
+            this.adminService.removerVendedor(login);
+            location.href = '/tabs/vendedores';
+            this.toastRemover();
           }
         }  
       ],

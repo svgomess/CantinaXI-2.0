@@ -44,4 +44,8 @@ export class ProdutoService {
   atualizarProduto(id: number, campo: string, alteracao: any) {
     return this.http.get(`${environment.baseUrl}/produto/${id}/atualizar/${campo}/${alteracao}`).subscribe(res => (console.log(res)));
   }
+
+  removerProduto(id: number) {
+    return this.http.get<ApiBase>(`${environment.baseUrl}/deletar/produto/${id}`).subscribe(res => (console.log(res)));
+  }
 }

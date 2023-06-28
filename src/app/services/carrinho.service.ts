@@ -10,7 +10,7 @@ export interface VendaDados {
   ValorTotal: number
   FkCliente: number
   FkFormaPagamento: number
-  FkUsuario: string
+  FkUsuario: string | null
   Produtos: any[]
 }
 
@@ -38,6 +38,7 @@ export class CarrinhoService {
     }
 
     produto.QtdEstoque--
+
     var checar = this.itensCarrinho.find(item => item.id === conteudo.id);
 
     if(!checar){
@@ -76,8 +77,6 @@ export class CarrinhoService {
       position: 'bottom',
     });
     await toast.present();
-
-    console.log("Removido")
   }
 
   async limparCarrinho(){
@@ -104,7 +103,6 @@ export class CarrinhoService {
     })
 
     await modal.present()
-    console.log(total)
   }
 
   calcularTotal(){

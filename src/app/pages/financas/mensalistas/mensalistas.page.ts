@@ -15,7 +15,6 @@ export class MensalistasPage implements OnInit {
 
   ngOnInit() {
     this.carregarClientes();
-    console.log(this.mensalistas)
   }
   
   carregarClientes() {

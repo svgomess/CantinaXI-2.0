@@ -7,7 +7,8 @@ import { VendaService } from 'src/app/services/venda.service';
   styleUrls: ['./financas.page.scss'],
 })
 export class FinancasPage implements OnInit {
-  totalDiario: any;
+  totalDiario: any = "0.00";
+  tema = localStorage.getItem('tema')
 
   constructor(
     private vendaService:VendaService,
@@ -16,6 +17,7 @@ export class FinancasPage implements OnInit {
   ngOnInit() {
     this.vendaService.totalDiario().subscribe((res) => {
       this.totalDiario = res.total.Total;
+      this.totalDiario == null ? this.totalDiario = 0.00 : null;
     })
   }
 

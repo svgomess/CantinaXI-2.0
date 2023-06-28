@@ -13,6 +13,7 @@ export class ListaprodutosPage implements OnInit {
   idCategoria: any = this.route.snapshot.paramMap.get('id');
   categoria: any;
   produtos: ProdutoDados[] = []; 
+  
 
   constructor(
     private route:ActivatedRoute, 
@@ -30,7 +31,6 @@ export class ListaprodutosPage implements OnInit {
       res.dados.forEach(produto => {
         produto.FkCategoria === this.idCategoria ? this.produtos.push(produto) : null
       });
-      console.log(this.produtos);
     })
   }
 }

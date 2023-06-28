@@ -1,9 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-button>
+      <ion-menu-button id="main-menu">
         <ion-icon slot="icon-only" name="menu"></ion-icon>
-      </ion-button>
+      </ion-menu-button>
     </ion-buttons>
     <ion-title>Finanças</ion-title>
   </ion-toolbar>
@@ -42,7 +42,6 @@
 
           <ion-card class="ion-padding" button [routerLink]="['mensalistas']" [disabled]="true">
             <div class="icone-imagem">
-              <!-- ImgBox Link - https://imgbox.com/yAa4OifG -->
               <img alt="Ícone de mensalistas" src="../../../../assets/icon/mensal_black.svg" class="small"/>
             </div>
             <ion-card-header>
@@ -51,10 +50,10 @@
           </ion-card>
 
       </ion-col>
+      
       <ion-col size="6">
         <ion-card class="ion-padding" button [routerLink]="['saldos']">
           <div class="icone-imagem">
-            <!-- ImgBox Link - https://imgbox.com/Gi5t4au1 -->
             <img alt="Ícone de saldo" src="../../../../assets/icon/saldo_black.svg" class="small"/>
           </div>
           <ion-card-header>

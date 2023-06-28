@@ -25,7 +25,11 @@
         </ion-item>
         <ion-item>
           <ion-icon slot="start" name="person"></ion-icon>
-          <ion-label> {{ produto?.Fornecedor }} <p> Fornecedor</ion-label>
+          <ion-label> {{ produto?.Fornecedor }} <p> Fornecedor </p></ion-label>
+        </ion-item>
+        <ion-item *ngIf='admin == "true"' button (click)="removerProduto()">
+          <ion-icon slot="start" name="trash" color="danger"></ion-icon>
+          <ion-label color="danger"> Remover produto </ion-label>
         </ion-item>
       </ion-list>
     </ion-card-content>

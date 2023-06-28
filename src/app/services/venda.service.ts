@@ -15,6 +15,7 @@ export interface VendaDados {
   Data: string
   FkCliente: number
   FkFormaPagamento: number
+  FkUsuario: string
 }
 
 @Injectable({

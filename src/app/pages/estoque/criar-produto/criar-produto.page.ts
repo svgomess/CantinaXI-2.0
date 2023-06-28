@@ -15,6 +15,8 @@ export class CriarProdutoPage implements OnInit {
   categorias: CategoriaDados[] = [];
   fornecedores: FornecedorDados[] = [];
   dadosForm!: FormGroup;
+  vendedor = localStorage.getItem('vendedorid');
+  admin = localStorage.getItem('administrador');
 
   enviado = false;
   
@@ -27,7 +29,6 @@ export class CriarProdutoPage implements OnInit {
     public produtoService: ProdutoService) { }
 
   ngOnInit() {
-    console.log()
     this.carregarCategorias()
     this.carregarFornecedores()
 
@@ -76,7 +77,6 @@ export class CriarProdutoPage implements OnInit {
   carregarCategorias(){
     this.categoriaService.listarCategorias().subscribe((res) => {
       this.categorias.push(...res.dados);
-      console.log(this.categorias);
     })
   }
 
@@ -87,16 +87,23 @@ export class CriarProdutoPage implements OnInit {
   }
 
   registrarProduto(){
+    if(this.admin === 'true'){
+      this.vendedor = 'Admin';
+    } 
+
+    this.vendedor == null ? location.href = '/admin' : null;
+    
     const dadosProduto: any = {
       'Nome': this.dadosForm.value.nome,
       'Preco': this.dadosForm.value.preco,
       'QtdEstoque': this.dadosForm.value.estoque,
       'FkFornecedor': this.dadosForm.value.fornecedor,
-      'FkUsuario': 'Placeholder',
+      'FkUsuario': this.vendedor,
       'FkCategoria': this.dadosForm.value.categoria,
       'FkImagem': 1
     }
 
     this.produtoService.inserirProduto(dadosProduto)
+    location.href = '/tabs/estoque';
   }
 }

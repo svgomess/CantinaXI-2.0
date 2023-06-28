@@ -1,3 +1,33 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu menuId="main-menu" content-id="main">
+    <ion-header>
+      <ion-toolbar color="secondary">
+        <div class="menu-bar">
+          <img src="../../../../assets/icon/white.svg" alt="Logo colégio XI" class="logo">
+        </div>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item *ngIf='admin == "false"'>
+          <ion-label>Vendedor</ion-label>
+          <p class="fora-de-estoque"> {{vendedor}} </p>
+        </ion-item>
+        <ion-item *ngIf='admin == "true"'>
+          <ion-label>Administrador</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-toggle (ionChange)="alterarTema($event)" justify="space-between" checked={{checadoTema}}>Modo noturno</ion-toggle>
+        </ion-item>
+        <ion-item *ngIf='admin == "false"'>
+          <ion-toggle (ionChange)="alterarModo($event)" justify="space-between" checked={{checadoEditor}}>Modo gerenciamento</ion-toggle>
+        </ion-item>
+        <ion-item button href="../../">
+          <ion-icon name="exit" slot="end" color="danger"></ion-icon>
+          <ion-label>Sair</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main"></ion-router-outlet>
 </ion-app>

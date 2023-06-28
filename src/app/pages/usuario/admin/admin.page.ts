@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { AdminService, UsuarioDados } from 'src/app/services/admin.service';
+import {Md5} from 'ts-md5';
 
 @Component({
   selector: 'app-admin',
@@ -8,28 +10,42 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./admin.page.scss'],
 })
 export class AdminPage implements OnInit {
+  admin: any;
+  md5: any;
+  login: UsuarioDados[] = []
 
   constructor(
     private alertCtrl: AlertController,
+    private adminService: AdminService,
     private router: Router
     ) { }
 
   ngOnInit() {
+    localStorage.setItem('telaInicial', 'true')
+    localStorage.setItem('administrador', 'false')
+
+    this.adminService.retornarAdmin().subscribe((res) => {
+      this.admin = res
+    })
   }
 
   pedirLogin(){
-    console.log("Login")
     this.criarLoginAlert()
   }
 
-  async inserirNome(){
+  async loginVendedor(){
     const alert = await this.alertCtrl.create({
       header: 'Vendedor',
       inputs: [
         {  
-          name: 'Nome',  
+          name: 'Login',  
           type: 'text',  
-          placeholder: 'Nome do vendedor'
+          placeholder: 'Digite o login do vendedor'
+        },
+        {  
+          name: 'Chave',  
+          type: 'password',  
+          placeholder: 'Digite a chave do vendedor'
         }
       ],
       buttons: [  
@@ -37,13 +53,12 @@ export class AdminPage implements OnInit {
           text: 'CANCELAR',  
           role: 'cancel',  
           handler: () => {  
-            console.log('Cancelado');  
           }  
         },  
         {  
           text: 'CONFIRMAR',  
           handler: async (data: any) => { 
-            data.Nome == '' ? this.mostrarAlerta() : localStorage.setItem('vendedor', data.Nome);  location.href = '/tabs/pedidos';
+            this.verificarLogin(data.Login, data.Chave);
           }
         }  
       ],
@@ -52,19 +67,24 @@ export class AdminPage implements OnInit {
     await alert.present();
   }
 
+  async erroLogin() {
+    const alert = await this.alertCtrl.create({
+      header: 'Alerta',
+      message: 'Senha incorreta.',
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
+
   async criarLoginAlert(){
     const alert = await this.alertCtrl.create({
-      header: 'Login',
+      header: 'Administrador',
       inputs: [
-        {  
-          name: 'Usuario',  
-          type: 'text',  
-          placeholder: 'Nome de usuario'
-        },
         {  
           name: 'Senha',  
           type: 'password',
-          placeholder: 'Senha'
+          placeholder: 'Digite a senha do admin'
         }
       ],
       buttons: [  
@@ -72,18 +92,22 @@ export class AdminPage implements OnInit {
           text: 'CANCELAR',  
           role: 'cancel',  
           handler: () => {  
-            console.log('Cancelado');  
           }  
         },  
         {  
           text: 'CONFIRMAR',
           role: 'confirm',  
           handler: async (data: any) => { 
-            const dados = {
-              'Nome': data.Usuario,
-              'Senha': data.Senha
-            }
-            console.log(dados)
+
+            const chaveAdmin = this.criarHash(data.Senha)
+            if(this.admin.Senha == chaveAdmin)
+            {
+              localStorage.setItem('administrador', 'true');
+              location.href = '/tabs/vendedores';
+            } else 
+            {
+              this.erroLogin();
+            } 
           }
         }  
       ],
@@ -100,5 +124,36 @@ export class AdminPage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  async erroLoginVendedor(mensagem: string) {
+    const alert = await this.alertCtrl.create({
+      header: 'Alerta',
+      message: mensagem,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
+
+  criarHash(senha: any) {
+    this.md5 = Md5.hashStr(senha)
+    return this.md5
+  }
+
+  verificarLogin(login: string, chave: string){
+    this.adminService.buscarVendedor(login).subscribe((res) => {
+      if(res.status === 404){
+        this.erroLoginVendedor("O vendedor não foi encontrado.");
+      } else if(res.dados.Senha === chave){
+        location.href = '/tabs/pedidos'; 
+
+        localStorage.setItem('vendedorid', res.dados.Login);
+        localStorage.setItem('vendedor', res.dados.Nome);
+        localStorage.setItem('administrador', 'false');
+      } else {
+        this.erroLoginVendedor("Senha incorreta.");
+      }
+    })
   }
 }

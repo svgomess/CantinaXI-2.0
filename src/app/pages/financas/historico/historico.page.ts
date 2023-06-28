@@ -11,6 +11,7 @@ import { VendaDados, VendaService } from 'src/app/services/venda.service';
 export class HistoricoPage implements OnInit {
   vendas: VendaDados[] = []; 
   private dateValue: any;
+  admin = localStorage.getItem('administrador');
 
   constructor(
     private route:ActivatedRoute, 
@@ -20,7 +21,6 @@ export class HistoricoPage implements OnInit {
   ngOnInit() {
     this.vendaService.listarVendas().subscribe((res) => {
       this.vendas.push(...res.dados);
-      console.log(res);
     })
   }
 
@@ -32,12 +32,10 @@ export class HistoricoPage implements OnInit {
     this.dateValue = value;
 
     let newValue = formatDate(value, 'YYYY-MM-dd', 'pt-br');
-    console.log(newValue);
     
     this.vendaService.listarVendaData(newValue).subscribe((res) => {
       this.vendas.splice(0)
       this.vendas.push(...res.dados);
-      console.log(res);
     })
   }
 

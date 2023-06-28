@@ -1,0 +1,83 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-menu-button id="main-menu">
+          <ion-icon slot="icon-only" name="menu"></ion-icon>
+        </ion-menu-button>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Vendedores</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- <ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar color="secondary">
+      <div class="menu-bar">
+        <img src="../../../../assets/icon/white.svg" alt="Logo colégio XI" class="logo">
+      </div>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item>
+        <ion-label>Administrador</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-toggle (ionChange)="alterarTema($event)" justify="space-between" checked={{checadoTema}}>Modo noturno</ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-toggle (ionChange)="alterarModo($event)" justify="space-between" checked={{checadoEditor}}>Modo gerenciamento</ion-toggle>
+      </ion-item>
+      <ion-item button [routerLink]="['../../']">
+        <ion-icon name="exit" slot="end" color="danger"></ion-icon>
+        <ion-label>Sair</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu> -->
+
+<!-- <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+  <ion-fab-button color="primary" (click)="mostrarCarrinho()">
+    <ion-icon name="cart"></ion-icon>
+  </ion-fab-button>
+</ion-fab> -->
+
+<ion-content [fullscreen]="true" id="main-content">
+  <ion-list>
+    <ion-card *ngFor="let vendedor of vendedores">
+      <ion-card-header>
+        <ion-card-title class="ion-text-center"> {{ vendedor.Nome }} </ion-card-title>
+        <ion-list>
+          <ion-item>
+            <ion-icon slot="start" name="person"></ion-icon>
+            <ion-label> Login <p> {{ vendedor.Login }} </p></ion-label>
+            <!-- <ion-label>Login</ion-label>
+            <p class="fora-de-estoque"> {{vendedor.Login}} </p> -->
+          </ion-item>
+          <ion-item>
+            <ion-icon slot="start" name="key"></ion-icon>
+            <ion-label> Chave <p> {{ vendedor.Senha }} </p></ion-label>
+            <!-- <ion-label>Chave</ion-label>
+            <p class="fora-de-estoque"> {{vendedor.Senha}} </p> -->
+          </ion-item>
+          <ion-item>
+            <ion-icon slot="start" name="mail"></ion-icon>
+            <ion-label> Email <p> {{ vendedor.Email }} </p></ion-label>
+            <!-- <ion-label>Email</ion-label>
+            <p class="fora-de-estoque"> {{vendedor.Email}} </p> -->
+          </ion-item>
+          <ion-item button (click)="removerVendedor(vendedor.Login)">
+            <ion-icon slot="start" name="trash" color="danger"></ion-icon>
+            <ion-label color="danger"> Remover vendedor </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-header>
+    </ion-card>
+    <ion-button expand="block" fill="clear" shape="round" color="medium" (click)="adicionarVendedor()">
+      <ion-icon slot="start" name="add"></ion-icon>
+      Novo vendedor
+    </ion-button>
+  </ion-list>
+</ion-content>

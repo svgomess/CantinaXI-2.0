@@ -19,6 +19,7 @@ export interface ListagemDados {
 export class EstoquePage implements OnInit {
   produtos: ProdutoDados[] = [];
   categorias: CategoriaDados[] = [];
+  gerenciamento = localStorage.getItem('gerenciamento');
 
   listagem: ListagemDados[] = [];
 
@@ -41,13 +42,11 @@ export class EstoquePage implements OnInit {
 
     this.categoriaService.listarCategorias().subscribe((res) => {
       this.categorias.push(...res.dados);
-      console.log(this.categorias);
     })
 
     this.produtoService.listarProdutos().subscribe((res) => {
       loading.dismiss();
       this.produtos.push(...res.dados);
-      console.log(this.produtos)
     })
   }
 
@@ -60,7 +59,6 @@ export class EstoquePage implements OnInit {
       cssClass: ['modal-75']
     })
     await modal.present()
-    console.log("inserir novo produto")
   }
 
   resetarPagina(){

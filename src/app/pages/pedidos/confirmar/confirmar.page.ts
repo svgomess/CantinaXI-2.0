@@ -12,6 +12,7 @@ import { ClienteDados, ClienteService } from 'src/app/services/cliente.service';
 export class ConfirmarPage implements OnInit {
   dadosForm!: FormGroup;
   radioSelecionado: any;
+  vendedor = localStorage.getItem('vendedorid');
 
   @Input("total") total!: number;
 
@@ -35,8 +36,6 @@ export class ConfirmarPage implements OnInit {
       clienteMensal: new FormControl(null),
       clienteSaldo: new FormControl(null)
     })
-
-    console.log(this.carrinhoService.itensCarrinho)
   }
 
   carregarClientes() {
@@ -78,12 +77,13 @@ export class ConfirmarPage implements OnInit {
   }
 
   async confirmarVenda(pagamento: number, cliente: number) {
+    this.vendedor == null ? location.href = '/admin' : null;
 
     const dadosVenda: VendaDados = {
       'ValorTotal': this.total,
       'FkCliente': cliente,
       'FkFormaPagamento': pagamento,
-      'FkUsuario': 'Placeholder',
+      'FkUsuario': this.vendedor,
       'Produtos': this.carrinhoService.itensCarrinho
     }
 

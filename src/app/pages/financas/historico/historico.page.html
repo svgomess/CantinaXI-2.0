@@ -5,6 +5,9 @@
     </ion-buttons>
     <ion-title size="large"> Histórico de Vendas </ion-title>
     <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="newspaper"></ion-icon>
+      </ion-button>
       <ion-button id="date">
         <ion-icon slot="icon-only" name="calendar"></ion-icon>
       </ion-button>
@@ -34,6 +37,7 @@
       <ion-card-header>
         <ion-card-subtitle> {{ venda.Data | date : 'cccc, d \'de\' MMMM \'ás\' H:mm' : '-06:00' : 'pt-BR' }} </ion-card-subtitle>
         <ion-card-title> Total - {{ venda.ValorTotal | currency : 'R$ ' }} </ion-card-title>
+        <ion-card-subtitle *ngIf='admin == "true"'> Realizada por {{ venda.FkUsuario }} </ion-card-subtitle>
       </ion-card-header>
     </ion-card>
   </ion-list>

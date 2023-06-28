@@ -54,6 +54,15 @@ const routes: Routes = [
             loadChildren: () => import('src/app/pages/estoque/info-produto/info-produto.module').then( m => m.InfoProdutoPageModule)
           }
         ]
+      },
+      {
+        path: 'vendedores',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('src/app/pages/vendedores/vendedores.module').then(m => m.VendedoresPageModule)
+          },
+        ]
       }
     ]
   },

@@ -16,7 +16,6 @@ export class CarrinhoPage implements OnInit {
     public carrinhoService: CarrinhoService) { }
 
   ngOnInit() {
-    console.log(this.carrinhoService.itensCarrinho)
   }
 
   fechar() {
